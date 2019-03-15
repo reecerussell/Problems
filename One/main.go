@@ -22,7 +22,7 @@ func canSumToK(arr []int, k int) (result bool) {
 
 	for _, i := range arr {
 		for _, j := range arr {
-			if (i + j) == k {
+			if (i+j) == k && i != j {
 				fmt.Printf("%d + %d = %d\n", i, j, k)
 				return true
 			}
