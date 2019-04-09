@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -9,39 +10,31 @@ import (
 func main() {
 	fmt.Println("Reverse Integer")
 	fmt.Println("Input: 36483")
-	fmt.Printf("Output: %d\n", reverse(36483))
+	fmt.Printf("Output: %d\n", reverse(-324879))
 }
 
 func reverse(x int) int {
 
-	num := strconv.Itoa(x)
-
-	isNegative := strings.Index(num, "-") > -1
-
+	chars := strings.Split(strconv.Itoa(x), "")
+	isNegative := chars[0] == "-"
 	if isNegative {
-		num = strings.Replace(num, "-", "", 1)
+		chars = chars[1:len(chars)]
 	}
 
-	reversedNum := ""
-
-	chars := strings.Split(num, "")
-
+	reversed := ""
 	for i := len(chars) - 1; i >= 0; i-- {
-		reversedNum += chars[i]
+		reversed += chars[i]
 	}
 
 	if isNegative {
-		num = "-" + reversedNum
-	} else {
-		num = reversedNum
+		reversed = "-" + reversed
 	}
 
-	y, err := strconv.ParseInt(num, 10, 32)
-	if err != nil {
+	x, _ = strconv.Atoi(reversed)
+
+	if x > math.MaxInt32 || x < math.MinInt32 {
 		return 0
 	}
-
-	x = int(y)
 
 	return x
 }

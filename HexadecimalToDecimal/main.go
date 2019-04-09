@@ -11,12 +11,11 @@ func main() {
 	fmt.Println("Input: 7E3")
 	fmt.Println("Expected: 2019")
 	fmt.Printf("Output: %d\n", Decode("7E3"))
+	fmt.Printf("Encoded: %d\n", Encode(Decode("7E3")))
 }
 
-func Decode(hex string) int {
-	var output int = 0
-
-	hexMap := map[string]int{
+func HexMap() map[string]int {
+	return map[string]int{
 		"0": 0,
 		"1": 1,
 		"2": 2,
@@ -34,6 +33,12 @@ func Decode(hex string) int {
 		"E": 14,
 		"F": 15,
 	}
+}
+
+func Decode(hex string) int {
+	var output int = 0
+
+	hexMap := HexMap()
 
 	chars := strings.Split(hex, "")
 
@@ -43,4 +48,12 @@ func Decode(hex string) int {
 	}
 
 	return output
+}
+
+func Encode(num int) int {
+	remainder := num
+
+	remainder = remainder % 16
+
+	return remainder
 }
